@@ -180,6 +180,7 @@ return [
         LaravelDoctrine\ORM\DoctrineServiceProvider::class,
         LaravelDoctrine\Migrations\MigrationsServiceProvider::class,
         RepositoryServiceProvider::class,
+        LaravelDoctrine\ACL\AclServiceProvider::class,
     ],
 
     /*
