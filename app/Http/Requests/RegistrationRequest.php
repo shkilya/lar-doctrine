@@ -4,27 +4,31 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegistrationRequest extends FormRequest
+final class RegistrationRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
+    private const EMAIL_PARAM = 'email';
+    private const PASSWORD_PARAM = 'password';
+
+    public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
+    public function rules(): array
     {
         return [
-            //
+            self::PASSWORD_PARAM => 'required|string',
+            self::EMAIL_PARAM => 'required|string',
         ];
+    }
+
+    public function getPassword(): string
+    {
+        return $this->get(self::PASSWORD_PARAM);
+    }
+
+    public function getEmail(): string
+    {
+        return $this->get(self::EMAIL_PARAM);
     }
 }

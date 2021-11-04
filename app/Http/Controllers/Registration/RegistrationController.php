@@ -1,14 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Registration;
 
 use App\Http\Requests\RegistrationRequest;
-use App\Utils\UseCases\Registration\Command;
-use App\Utils\UseCases\Registration\Handler as RegistrationHandler;
+use App\Utils\UseCases\Registration\Command\RequestForRegistration\Handler as RegistrationHandler;
+use App\Utils\UseCases\Registration\Command\RequestForRegistration\Command as RegistrationCommand;
 use Exception;
+use Illuminate\Http\Request;
 use Psr\Log\LoggerInterface;
+use Spatie\RouteAttributes\Attributes\Middleware;
+use Spatie\RouteAttributes\Attributes\Post;
+use Spatie\RouteAttributes\Attributes\Prefix;
 
+#[Prefix('/api/v1'),Middleware('api')]
 class RegistrationController
 {
     public function __construct(
@@ -16,14 +21,14 @@ class RegistrationController
         private LoggerInterface     $logger
     )
     {
-
     }
 
-    public function __invoke(RegistrationRequest $request)
+    #[Post('registration',name: "registration")]
+    public function index(RegistrationRequest $request)
     {
         try {
             $this->registrationHandler->handle(
-                new Command(
+                new RegistrationCommand(
                     email: $request->getEmail(),
                     password: $request->getPassword()
                 )
@@ -35,6 +40,5 @@ class RegistrationController
             ]);
             throw $exception;
         }
-
     }
 }

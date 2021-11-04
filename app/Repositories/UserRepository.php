@@ -27,4 +27,9 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
                 ->setParameter(':email', $email->getValue())
                 ->getQuery()->getSingleScalarResult() > 0;
     }
+
+    public function findByJoinConfirmToken(string $token): ?User
+    {
+        return $this->findOneBy(['registrationToken.token' => $token]);
+    }
 }

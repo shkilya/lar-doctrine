@@ -5,9 +5,11 @@ namespace App\Entities;
 
 use App\ValueObjects\Common\Email;
 use App\ValueObjects\User\Status;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use DomainException;
 use LaravelDoctrine\ACL\Permissions\HasPermissions;
 use LaravelDoctrine\ACL\Roles\HasRoles;
 
@@ -119,6 +121,16 @@ final class User
     public function getRegistrationToken(): ?Token
     {
         return $this->registrationToken;
+    }
+
+    public function confirmVerification(string $token, DateTimeImmutable $date):void
+    {
+        if ($this->registrationToken === null) {
+            throw new DomainException('Confirmation is not required.');
+        }
+        $this->registrationToken->validate($token, $date);
+        $this->status = Status::active();
+        $this->registrationToken = null;
     }
 
 }

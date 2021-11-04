@@ -1,17 +1,13 @@
 <?php
 declare(strict_types=1);
+namespace App\Utils\UseCases\Registration\Command\RequestForRegistration;
 
-namespace App\Utils\UseCases\Registration;
-
-class Command
+final class Command
 {
     public function __construct(
         public string $email,
         public string $password
     )
     {
-
     }
-
-
 }

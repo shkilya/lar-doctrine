@@ -7,8 +7,7 @@ use App\Entities\Role;
 
 interface RoleRepositoryInterface
 {
-    /**
-     * @return Role
-     */
     public function getRoleUser():Role;
+
+    public function isRoleExist(string $role):bool;
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Providers\RepositoryServiceProvider;
+use App\Providers\TokenGeneratorServiceProvider;
 
 return [
 
@@ -181,6 +182,7 @@ return [
         LaravelDoctrine\Migrations\MigrationsServiceProvider::class,
         RepositoryServiceProvider::class,
         LaravelDoctrine\ACL\AclServiceProvider::class,
+        TokenGeneratorServiceProvider::class,
     ],
 
     /*
