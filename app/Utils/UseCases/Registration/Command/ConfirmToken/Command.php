@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Utils\UseCases\Registration\Command\VerifyToken;
+namespace App\Utils\UseCases\Registration\Command\ConfirmToken;
 
 final class Command
 {

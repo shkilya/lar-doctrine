@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Utils\UseCases\Registration\Command\VerifyToken;
+namespace App\Utils\UseCases\Registration\Command\ConfirmToken;
 
 use App\Utils\Repositories\UserRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;

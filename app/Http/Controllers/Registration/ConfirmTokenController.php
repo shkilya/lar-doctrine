@@ -3,16 +3,16 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Registration;
 
-use App\Utils\UseCases\Registration\Command\VerifyToken\Command as VerifyTokenCommand;
-use App\Utils\UseCases\Registration\Command\VerifyToken\Handler as VerifyTokenHandler;
+use App\Utils\UseCases\Registration\Command\ConfirmToken\Command as ConfirmTokenCommand;
+use App\Utils\UseCases\Registration\Command\ConfirmToken\Handler as ConfirmTokenHandler;
 use Psr\Log\LoggerInterface;
 use Spatie\RouteAttributes\Attributes\Get;
 
-final class VerificationController
+final class ConfirmTokenController
 {
     public function __construct(
-        private VerifyTokenHandler $verifyTokenHandler,
-        private LoggerInterface    $logger
+        private ConfirmTokenHandler $verifyTokenHandler,
+        private LoggerInterface     $logger
     )
     {
     }
@@ -24,7 +24,7 @@ final class VerificationController
     public function __invoke(string $token): void
     {
         try {
-            $this->verifyTokenHandler->handle(new VerifyTokenCommand($token));
+            $this->verifyTokenHandler->handle(new ConfirmTokenCommand($token));
         } catch (\Exception $exception) {
             $this->logger->critical('', [
                 'message' => $exception->getMessage()
